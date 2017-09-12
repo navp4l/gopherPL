@@ -42,15 +42,9 @@ func main() {
 
 	gridLoad := 175.0
 
-	fmt.Println("1) Generate Power Plan Report")
-	fmt.Println("2) Generate Power Grid Report")
-	fmt.Println("Please enter a valid option")
+	//var option string
 
-	var option string
-
-	fmt.Scanln(&option)
-
-	fmt.Println("")
+	option := getUserOption()
 
 	switch {
 
@@ -67,6 +61,14 @@ func main() {
 
 	}
 
+}
+func getUserOption() (option string) {
+	fmt.Println("1) Generate Power Plan Report")
+	fmt.Println("2) Generate Power Grid Report")
+	fmt.Println("Please enter a valid option")
+	fmt.Scanln(&option)
+	fmt.Println("")
+	return
 }
 func generatePowerGridReport(activeReactors []int, reactors []float64, gridLoad float64) (activeCapacity float64) {
 	//activeCapacity := 0.0
