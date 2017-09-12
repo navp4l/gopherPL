@@ -29,12 +29,14 @@ import (
 
 func main() {
 
-	reactors := make([]float64, 5, 100 )
-	reactors[0] = 100.0
-	reactors[1] = 110.0
-	reactors[2] = 120.0
-	reactors[3] = 130.0
-	reactors[4] = 140.0
+	//reactors := make([]float64, 5, 100 )
+	//reactors[0] = 100.0
+	//reactors[1] = 110.0
+	//reactors[2] = 120.0
+	//reactors[3] = 130.0
+	//reactors[4] = 140.0
+
+	reactors := []float64 {100.0, 110.0, 120.0, 130.0, 140.0}
 
 	activeReactors := []int {0,1}
 
@@ -42,16 +44,18 @@ func main() {
 
 	fmt.Println("1) Generate Power Plan Report")
 	fmt.Println("2) Generate Power Grid Report")
-	fmt.Print("Please enter a valid option")
+	fmt.Println("Please enter a valid option")
 
 	var option string
 
 	fmt.Scanln(&option)
 
+	fmt.Println("")
+
 	switch {
 
 	case option == "1":
-		generatePlantCapacityReport(reactors)
+		generatePlantCapacityReport(reactors...)
 	case option == "2":
 		activeCapacity := generatePowerGridReport(activeReactors, reactors, gridLoad)
 		fmt.Printf("%-20s%.0f\n", "Total capacity is:", activeCapacity)
@@ -71,7 +75,7 @@ func generatePowerGridReport(activeReactors []int, reactors []float64, gridLoad 
 	}
 	return
 }
-func generatePlantCapacityReport(reactors []float64) {
+func generatePlantCapacityReport(reactors ...float64) {
 	for index, capacity := range reactors {
 		fmt.Printf("Plant %d capacity: %.0f\n", index, capacity)
 	}
