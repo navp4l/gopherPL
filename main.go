@@ -51,24 +51,28 @@ func main() {
 	switch {
 
 	case option == "1":
-		for index, capacity := range reactors {
-			fmt.Printf("Plant %d capacity: %.0f\n", index, capacity)
-		}
+		generatePlantCapacityReport(reactors)
 	case option == "2":
-		activeCapacity := 0.0
-		for plantId := range activeReactors {
-			activeCapacity += reactors[plantId]
-		}
-
+		activeCapacity := generatePowerGridReport(activeReactors, reactors, gridLoad)
 		fmt.Printf("%-20s%.0f\n", "Total capacity is:", activeCapacity)
-
 		fmt.Printf("%-20s%.0f\n", "Current grid load is:", gridLoad)
-
-		fmt.Printf("%-20s%.2f%%\n", "Current Utilization is:", gridLoad / activeCapacity * 100)
+		fmt.Printf("%-20s%.2f%%\n", "Current Utilization is:", gridLoad/activeCapacity*100)
 
 	default:
 		fmt.Println("Please enter a valid option!")
 
 	}
 
+}
+func generatePowerGridReport(activeReactors []int, reactors []float64, gridLoad float64) (activeCapacity float64) {
+	//activeCapacity := 0.0
+	for plantId := range activeReactors {
+		activeCapacity += reactors[plantId]
+	}
+	return
+}
+func generatePlantCapacityReport(reactors []float64) {
+	for index, capacity := range reactors {
+		fmt.Printf("Plant %d capacity: %.0f\n", index, capacity)
+	}
 }
